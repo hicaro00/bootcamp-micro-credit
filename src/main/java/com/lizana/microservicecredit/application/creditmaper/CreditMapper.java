@@ -9,22 +9,24 @@ import reactor.core.publisher.Mono;
 public class CreditMapper {
 
     private CreditMapper(){
-
     }
-
-    public static Maybe<CreditDto> entityToDto(Maybe<Credit> credit) {
-        return credit.flatMap(creditEntity -> {
+        public static CreditDto entityToDto(Credit credit) {
             CreditDto creditDto = new CreditDto();
-            BeanUtils.copyProperties(creditEntity, creditDto);
-            return Maybe.just(creditDto);
-        });
-    }
+            BeanUtils.copyProperties(credit, creditDto);
+            return creditDto;
+        }
 
-    public static Maybe<Credit> dtoToEntity(CreditDto creditDto) {
-        Credit credit = new Credit();
-        BeanUtils.copyProperties(creditDto, credit);
-        return Maybe.just(credit);
-    }
+        public static Credit dtoToEntity(CreditDto creditDto) {
+            Credit credit = new Credit();
+            BeanUtils.copyProperties(creditDto, credit);
+            return credit;
+        }
+
+        public static Credit updateEntity(Credit credit, CreditDto creditDto) {
+            BeanUtils.copyProperties(creditDto, credit);
+            return credit;
+        }
+
 
 
 }
