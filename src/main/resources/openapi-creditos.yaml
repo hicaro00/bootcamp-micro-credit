@@ -1,0 +1,88 @@
+swagger: "3.0.0"
+info:
+  title: Microservicio de Créditos
+  version: 1.0.0
+  description: API para gestionar créditos.
+
+paths:
+  /creditos/{creditId}:
+    get:
+      summary: Obtener información de un crédito
+      parameters:
+        - name: credito_id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Información detallada del crédito.
+
+    put:
+      summary: Actualizar información de un crédito
+      parameters:
+        - name: creditId
+          in: path
+          required: true
+          type: string
+        - name: Crédito
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Credit"
+      responses:
+        200:
+          description: Información del crédito actualizada.
+
+    delete:
+      summary: Eliminar un crédito
+      parameters:
+        - name: creditId
+          in: path
+          required: true
+          type: string
+      responses:
+        204:
+          description: Crédito eliminado con éxito.
+
+  /creditos:
+    post:
+      summary: Crear un nuevo crédito
+      parameters:
+        - name: Crédito
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Credit"
+      responses:
+        201:
+          description: Crédito creado con éxito.
+
+  /clientes/{customerId}/creditos:
+    get:
+      summary: Consultar créditos de un cliente
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Lista de créditos del cliente.
+
+definitions:
+  Credit:
+    type: object
+    properties:
+      customerId:
+        type: string
+      creditType:
+        type: string
+        enum:
+          - Personal
+          - Empresarial
+      interestRate:
+        type: number
+      outstandingBalance:
+        type: number
+
+
