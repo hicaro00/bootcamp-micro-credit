@@ -46,8 +46,8 @@ public class CreditController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(update).getBody();
     }
 
-    @DeleteMapping("/{_id}")
-    public Mono<Void> deleteCredit (@PathVariable(name = "_id") String idcredit){
+    @DeleteMapping("/{id}")
+    public Mono<Void> deleteCredit (@PathVariable(name = "id") String idcredit){
                return creditService.deleteCreditById(idcredit);
     }
 

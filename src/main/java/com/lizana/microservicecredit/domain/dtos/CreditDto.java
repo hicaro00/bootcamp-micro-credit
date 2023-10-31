@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,33 +22,12 @@ public class CreditDto {
   private String interestRate;  // tasa de interes del credito aprovado
   private BigDecimal totalAmount;  // monto total del credito aprobado
   private BigDecimal totalInterest; // interes totales generados por el credito
-  private BigDecimal outstandingBalance; //saldo pendietne as pagar
-  private DepositAmountDto depositAmountDto; //deposito o pago de deuda
-  private WithdrawalAmountDto withdrawalAmountDto; //retiro de saldo del credito
+  private List<OutstandingBalance> outstandingBalances = new ArrayList<>(); //saldo pendietne as pagar
+  private List<DepositAmountDto> depositAmountDtos = new ArrayList<>(); //deposito o pago de deuda
+  private List<WithdrawalAmountDto> withdrawalAmountDtos = new ArrayList<>(); //retiro de saldo del credito
 
 
-  public static CreditDto combineAll(List<CreditDto> creditDtos) {
-    if (creditDtos == null || creditDtos.isEmpty()) {
-      return new CreditDto(); // Devuelve un CreditDto vacío si la lista está vacía o nula
-    }
 
 
-    CreditDto combinedCreditDto = new CreditDto();
-
-    combinedCreditDto.setCustomerId(creditDtos.get(0).getCustomerId());
-
-    for (CreditDto creditDto : creditDtos) {
-      combinedCreditDto.setCustomerId(creditDto.getCustomerId());
-      combinedCreditDto.setInterestRate(combinedCreditDto.getInterestRate());
-      combinedCreditDto.setCreditType(combinedCreditDto.getCreditType());
-      combinedCreditDto.setDate(combinedCreditDto.getDate());
-      combinedCreditDto.setTotalAmount(combinedCreditDto.getTotalAmount().add(creditDto.getTotalAmount()));
-      combinedCreditDto.setTotalInterest(combinedCreditDto.getTotalInterest().add(creditDto.getTotalInterest()));
-      combinedCreditDto.setOutstandingBalance(combinedCreditDto.getOutstandingBalance());
-
-    }
-
-    return combinedCreditDto;
-  }
 
 }

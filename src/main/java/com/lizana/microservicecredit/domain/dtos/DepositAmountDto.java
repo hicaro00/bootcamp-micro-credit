@@ -13,10 +13,9 @@ import java.util.Date;
 public class DepositAmountDto {
 
 
-  private String depositoId;
-  private String accountDestinyId;
-  private BigDecimal amount;
-  private Date depositDate;
-
+  private String depositoId; //ide de la operacion
+  private String accountDestinyId; // desde donde se deposito ,desde que cuenta || o deq agencia o cajero agencia
+  private BigDecimal amount; // monot depositado
+  private Date depositDate; // fechA del deposito
 
 }
