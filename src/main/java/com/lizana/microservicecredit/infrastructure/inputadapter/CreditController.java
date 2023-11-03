@@ -26,7 +26,7 @@ public class CreditController {
 
     @GetMapping ("/{id}")
     @ResponseBody
-    public Mono<CreditDto> getInfoCreditById (String creditId){
+    public Mono<CreditDto> getInfoCreditById (@PathVariable (name = "id") String creditId){
         Mono<CreditDto> credit = creditService.getInfoByIdCredit(creditId);
         return ResponseEntity.status(HttpStatus.FOUND).body(credit).getBody();
 

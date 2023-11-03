@@ -22,7 +22,7 @@ public class CreditDto {
   private boolean temporaryBlock; //true or false  cuenta bloqueada
   private int numberOfTransactions; //numer de transacciones libres de comicion 20
   private double transactionFee; //comision por trnasacciiones
-  private String interestRate;  // tasa de interes del credito aprovado
+  private Double interestRate;  // tasa de interes del credito aprovado
   private BigDecimal totalAmount;  // monto total del credito aprobado
   private BigDecimal totalInterest; // interes totales generados por el credito
   private BigDecimal availableCredit; // saldo disponoble del credito ,, actualisacion cosntante
