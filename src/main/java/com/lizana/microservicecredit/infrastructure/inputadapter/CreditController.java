@@ -1,10 +1,10 @@
 package com.lizana.microservicecredit.infrastructure.inputadapter;
 
 import com.lizana.microservicecredit.domain.dtos.CreditDto;
+import com.lizana.microservicecredit.domain.dtos.CustomerDto;
 import com.lizana.microservicecredit.infrastructure.imputport.CreditService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +34,8 @@ public class CreditController {
 
     @PostMapping
     @ResponseBody
-    public Mono<CreditDto> creatingCredit(@RequestBody CreditDto creditoNuevo){
-        Mono<CreditDto> newCredit = creditService.createCredit(creditoNuevo);
+    public Mono<CustomerDto> creatingCredit(@RequestBody CreditDto creditoNuevo){
+        Mono<CustomerDto> newCredit = creditService.addCredit(creditoNuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCredit).getBody();
     }
 

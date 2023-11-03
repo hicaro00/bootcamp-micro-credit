@@ -16,6 +16,7 @@ public class MicroserviceCreditApplication {
 	public WebClient webClient(){
 		return WebClient.builder().build();
 	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceCreditApplication.class, args);
 	}
