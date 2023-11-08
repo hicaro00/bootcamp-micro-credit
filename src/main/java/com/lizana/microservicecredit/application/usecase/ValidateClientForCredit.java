@@ -4,21 +4,23 @@ import com.lizana.microservicecredit.domain.dtos.CreditDto;
 import com.lizana.microservicecredit.domain.dtos.CustomerDto;
 import com.lizana.microservicecredit.infrastructure.imputport.WebClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
 public class ValidateClientForCredit implements ValidateForCreditService {
-
-  private static final String URI_CUSTOMERSERVICE_GETBYID = "http://localhost:8080/customer/{id}";
+  @Value("${URI_CUSTOMERSERVICE_GETBYID}")
+  String URI_CUSTOMERSERVICE_GETBYID;
   @Autowired
   WebClientService webClientService;
-
+  @Override
   public Mono<Boolean> validateClient(CreditDto creditDto) {
 
     String clientId = creditDto.getCustomerId();
 
-    Mono<CustomerDto> customerDtoMono = webClientService.getFromExternalService(URI_CUSTOMERSERVICE_GETBYID, clientId);
+    Mono<CustomerDto> customerDtoMono =
+        webClientService.getFromExternalService(URI_CUSTOMERSERVICE_GETBYID, clientId);
 
     return customerDtoMono.flatMap(customer -> {
       if ("PERSONAL".equals(customer.getClientType())) {

@@ -1,5 +1,6 @@
 package com.lizana.microservicecredit.domain.dtos;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,9 @@ import java.util.Date;
 public class WithdrawalAmountDto {
 
 
-  private String withdrawalId; //id de la operacion
-  private String originOfWithdrawal; //desde donde se iso el retiro   cajero|| o se hiso un pago hacia donde
-  private BigDecimal amount; //monto del retiro
-  private Date dateWithdrawal; // fecha del retiro
-
+  private String movementId;
+  private BigDecimal amount;
+  private String originMovement;
+  private LocalDate dateOfMovement;
+  private String authorizationCode;
 }

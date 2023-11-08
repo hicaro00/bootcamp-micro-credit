@@ -1,5 +1,6 @@
 package com.lizana.microservicecredit.domain.dtos;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,9 @@ import java.util.Date;
 public class DepositAmountDto {
 
 
-  private String depositoId; //ide de la operacion
-  private String accountDestinyId; // desde donde se deposito ,desde que cuenta || o deq agencia o cajero agencia
-  private BigDecimal amount; // monot depositado
-  private Date depositDate; // fechA del deposito
-
+  private String movementId;
+  private BigDecimal amount;
+  private String originMovement;
+  private LocalDate dateOfMovement;
+  private String authorizationCode;
 }

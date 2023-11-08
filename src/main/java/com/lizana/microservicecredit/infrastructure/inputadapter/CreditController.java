@@ -1,7 +1,9 @@
 package com.lizana.microservicecredit.infrastructure.inputadapter;
 
+import com.lizana.microservicecredit.application.expetion.CustomExeption;
 import com.lizana.microservicecredit.domain.dtos.CreditDto;
 import com.lizana.microservicecredit.domain.dtos.CustomerDto;
+import com.lizana.microservicecredit.domain.dtos.MovementDto;
 import com.lizana.microservicecredit.infrastructure.imputport.CreditService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +34,15 @@ public class CreditController {
 
     }
 
+
+
     @PostMapping
     @ResponseBody
     public Mono<CustomerDto> creatingCredit(@RequestBody CreditDto creditoNuevo){
         Mono<CustomerDto> newCredit = creditService.addCredit(creditoNuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCredit).getBody();
     }
+
 
     @PutMapping
     @ResponseBody
@@ -50,6 +55,10 @@ public class CreditController {
     public Mono<Void> deleteCredit (@PathVariable(name = "id") String idcredit){
                return creditService.deleteCreditById(idcredit);
     }
-
+    @ResponseBody
+    @PostMapping("/creditpay")
+    public Mono<CreditDto> creditPay(@RequestBody MovementDto movementDto){
+        return creditService.creditPay(movementDto);
+    }
 
 }
